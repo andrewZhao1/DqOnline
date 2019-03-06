@@ -3,9 +3,6 @@ from django.db import models
 from organization.models import CourseOrg
 
 
-
-
-
 class Course(models.Model):
     course_org = models.ForeignKey(CourseOrg, on_delete=models.CASCADE, verbose_name=u"课程机构", blank=True, null=True)
     name = models.CharField(max_length=50, verbose_name=u"课程名")
@@ -17,11 +14,21 @@ class Course(models.Model):
     fav_nums = models.IntegerField(default=0, verbose_name=u"收藏人数")
     image = models.ImageField(upload_to="course/%Y/%m", verbose_name=u"封面图", max_length=100)
     click_nums = models.IntegerField(default=0, verbose_name=u"点击数")
+    category = models.CharField(max_length=20, verbose_name=u"课程类别", default=u"课文")
+    tag = models.CharField(max_length=10, verbose_name=u"课程标签", default="")
     add_time = models.DateTimeField(default=datetime.now, verbose_name=u"添加时间")
 
     class Meta:
         verbose_name = u"课程"
         verbose_name_plural = verbose_name
+
+    def get_zj_nums(self):
+        # 获取课程章节数
+        return self.lesson_set.all().count()
+
+    def get_learn_users(self):
+        # 获取课程章节数
+        return self.usercourse_set.all()[:5]
 
     def __str__(self):
         return self.name
@@ -38,6 +45,7 @@ class Lesson(models.Model):
 
     def __str__(self):
         return self.name
+
 
 class Video(models.Model):
     lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE, verbose_name=u"章节")

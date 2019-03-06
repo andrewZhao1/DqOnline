@@ -2,11 +2,11 @@
 {% block title %}机构课程列表页{% endblock %}
 {% block page_path %}机构课程{% endblock %}
 {% block right_form %}
-<div class="right companycenter layout" >
-		<div class="head">
-			<h1>机构课程</h1>
-		</div>
-		<div class="brief group_list">
+    <div class="right companycenter layout">
+        <div class="head">
+            <h1>机构课程</h1>
+        </div>
+        <div class="brief group_list">
             {% for course in all_courses %}
                 <div class="module1_5 box">
                     <a class="comp-img-box" href="">
@@ -20,7 +20,7 @@
                     </div>
                     <div class="bottom">
                         <span class="fl">{{ course.course_org.name }}</span>
-                         <span class="star fr  notlogin
+                        <span class="star fr  notlogin
                             " data-favid="13" data-fav-type="4">
                             {{ course.fav_nums }}
                         </span>
@@ -28,12 +28,12 @@
                 </div>
             {% endfor %}
 
-		</div>
-			<div class="pageturn">
-                <ul class="pagelist">
-                    <li class="active"><a href="?page=1">1</a></li>
-                </ul>
-            </div>
-	</div>
+        </div>
+        <div class="pageturn">
+            <ul class="pagelist">
+                <li class="active"><a href="?page=1">1</a></li>
+            </ul>
+        </div>
+    </div>
 {% endblock %}
 

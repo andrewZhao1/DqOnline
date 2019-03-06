@@ -172,13 +172,13 @@
                     data: $('#jsStayForm').serialize(),
                     async: true,
                     success: function (callback) {
-                      console.log(callback)
-                      if (callback.status == 'success') {
-                          $('#jsStayForm')[0].reset();
-                          alert("提交成功")
-                      } else if (callback.status == 'fail') {
-                          $('#jsCompanyTips').html(callback.msg)
-                      }
+                        console.log(callback)
+                        if (callback.status == 'success') {
+                            $('#jsStayForm')[0].reset();
+                            alert("提交成功")
+                        } else if (callback.status == 'fail') {
+                            $('#jsCompanyTips').html(callback.msg)
+                        }
                     },
                 });
             });
