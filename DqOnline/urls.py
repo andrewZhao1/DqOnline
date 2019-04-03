@@ -13,22 +13,20 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
 from django.urls import path, include
-from django.views.generic import TemplateView
 from django.views.static import serve
 import xadmin
 
-from users.views import LoginView, RegisterView, UserActiveView, ForgetPwdView, ResetView, ResetPwdView
-from organization.views import OrgView
+from users.views import LoginView, RegisterView, UserActiveView, ForgetPwdView, ResetView, ResetPwdView, LogoutView, \
+    IndexView
 from DqOnline.settings import MEDIA_ROOT
 
 urlpatterns = [
     path('xadmin/', xadmin.site.urls),
-    path('', TemplateView.as_view(template_name='index.html'), name='index'),
+    path('', IndexView.as_view(), name='index'),
     path('login/', LoginView.as_view(), name='login'),
+    path('logout/', LogoutView.as_view(), name='logout'),
     path('register/', RegisterView.as_view(), name='register'),
-    path('login/', LoginView.as_view(), name='logout'),
     path('captcha/', include('captcha.urls')),
     path('active/<str:active_code>', UserActiveView.as_view(), name='user_active'),
     path('forget/', ForgetPwdView.as_view(), name='forget_pwd'),
@@ -38,10 +36,13 @@ urlpatterns = [
     # 课程机构
     path('org/', include('organization.urls', namespace='org')),
 
-    # 课程机构
+    # 课程
     path('course/', include('courses.urls', namespace='course')),
 
     # 配置上传文件的访问地址
     path('media/<path:path>', serve, {'document_root': MEDIA_ROOT}),
+
+    # 个人中心
+    path('users/', include('users.urls', namespace='users')),
 
 ]

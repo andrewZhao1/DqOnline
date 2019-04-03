@@ -1,7 +1,8 @@
 from django.urls import path, include
-from .views import OrgView, AddUserAskView, OrgHomeView, OrgCourseView, OrgDescView, OrgTeacherView, AddFavView
+from .views import OrgView, AddUserAskView, OrgHomeView, OrgCourseView, OrgDescView, OrgTeacherView, AddFavView, \
+    TeacherListView, TeacherDetailView
 
-app_name='organization'
+app_name = 'organization'
 urlpatterns = [
     # 课程机构列表页
     path('list/', OrgView.as_view(), name='org_list'),
@@ -11,4 +12,6 @@ urlpatterns = [
     path('desc/<int:org_id>', OrgDescView.as_view(), name='org_desc'),
     path('teacher/<int:org_id>', OrgTeacherView.as_view(), name='org_teacher'),
     path('add_fav/', AddFavView.as_view(), name='add_fav'),
+    path('teacher/list/', TeacherListView.as_view(), name='teacher_list'),
+    path('teacher/detail/<int:teacher_id>', TeacherDetailView.as_view(), name='teacher_detail'),
 ]
